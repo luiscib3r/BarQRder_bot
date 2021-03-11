@@ -24,6 +24,12 @@ def start(update: Update, context: CallbackContext):
     update.message.reply_text(start_message)
 
 
+def cid(update: Update, context: CallbackContext):
+    id = update.message.chat.id
+
+    update.message.reply_text(str(id))
+
+
 # Send files
 def send_file(filename: str, chat: Chat):
     chat.send_action(action=ChatAction.UPLOAD_PHOTO, timeout=None)
@@ -104,6 +110,8 @@ if __name__ == '__main__':
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler('start', start))
+
+    dp.add_handler(CommandHandler('cid', cid))
 
     dp.add_handler(ConversationHandler(
         entry_points=[
